@@ -1,0 +1,138 @@
+#define user_detail_layout(focus)
+
+#@layout()
+#define css()
+#@layout_css?()
+
+#end
+
+#define script()
+#@layout_script?()
+<script>
+
+    var action = "##(focus)";
+    $(action).addClass("menu-open");
+    $(action).children('a').addClass('active');
+
+
+    $('#userForm').on('submit', function () {
+        ajaxSubmit("#userForm", function () {
+            toastr.success('修改成功');
+        });
+        return false;
+    });
+</script>
+#end
+
+#define content()
+    <section class="content-header">
+
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-sm-6">
+
+                    <div class="row mb-2">
+                        <div class="col-sm-12">
+                            <h1>
+                                用户资料
+                                <small data-toggle="tooltip" title="" data-placement="right"
+                                       data-trigger="hover"><i class="nav-icon far fa-question-circle"></i></small>
+                                <small> 首页 / 用户 / 用户资料</small>
+                            </h1>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div><!-- /.container-fluid -->
+
+
+    </section>
+
+    <section class="content">
+
+        <div class="row">
+            <div class="col-md-2">
+
+                <div class="card card-outline card-primary">
+                    <div class="card-body card-profile text-center" style="padding: 1.25rem 1.25rem 0 1.25rem">
+                        <a href="#(CPATH)/admin/user/detail/avatar/#(user.id)"><img
+                                class="profile-user-img img-responsive img-circle" src="#(user.avatar ??)"></a>
+                        <h3 class="profile-username text-center">#(user.showName ??)</h3>
+                        <p class="text-muted">#(user.identity ??)</p>
+                    </div>
+
+                    <div class="card-body">
+                        <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu"
+                            data-accordion="false" id="nav">
+                            #hasPermission('/admin/user/detail')
+                            <li class="nav-item" id="detail-base">
+                                <a class="nav-link" href="#(CPATH)/admin/user/detail/#(user.id)"><i
+                                        class="fas fa-user"></i> 基本资料</a></li>
+                            #end
+                            #hasPermission('/admin/user/detail/tag')
+                            <li class="nav-item" id="detail-tag"><a class="nav-link"
+                                                             href="#(CPATH)/admin/user/detail/tag/#(user.id)"><i
+                                    class="fas fa-tags"></i> 用户标签</a></li>
+                            #end
+                            #hasPermission('/admin/user/detail/role')
+                            <li class="nav-item" id="detail-role"><a class="nav-link"
+                                                              href="#(CPATH)/admin/user/detail/role/#(user.id)"><i
+                                    class="fas fa-user-friends"></i> 角色分配</a></li>
+                            #end
+                            #hasPermission('/admin/user/detail/communication')
+                            <li class="nav-item" id="detail-communication">
+                                <a class="nav-link" href="#(CPATH)/admin/user/detail/communication/#(user.id)"><i
+                                        class="fas fa-phone-square"></i> 通信资料</a></li>
+                            #end
+                            #hasPermission('/admin/user/detail/pwd')
+                            <li class="nav-item" id="detail-pwd"><a class="nav-link"
+                                                             href="#(CPATH)/admin/user/detail/pwd/#(user.id)"><i
+                                    class="fas fa-key"></i> 重置密码</a></li>
+                            #end
+                            #hasPermission('/admin/user/detail/signature')
+                            <li class="nav-item" id="detail-signature"><a class="nav-link"
+                                                                   href="#(CPATH)/admin/user/detail/signature/#(user.id)"><i
+                                    class="fas fa-bars"></i> 个人签名</a></li>
+                            #end
+                            #hasPermission('/admin/user/detail/other')
+                            <li class="nav-item" id="detail-other"><a class="nav-link"
+                                                               href="#(CPATH)/admin/user/detail/other/#(user.id)">
+                                <i class="fas fa-leaf"></i> 其他属性</a></li>
+                            #end
+                            #hasPermission('/admin/user/detail/avatar')
+                            <li class="nav-item" id="detail-avatar"><a class="nav-link"
+                                                                href="#(CPATH)/admin/user/detail/avatar/#(user.id)"><i
+                                    class="fab fa-black-tie"></i> 修改头像 </a></li>
+                            #end
+                            #hasPermission('/admin/user/detail/utm')
+                            <li class="nav-item" id="detail-utm"><a class="nav-link"
+                                                             href="#(CPATH)/admin/user/detail/utm/#(user.id)">
+                                <i class="fas fa-hourglass-half"></i> 行为记录 </a></li>
+                            #end
+                            #hasPermission('/admin/user/detail/integral')
+                            <li class="nav-item" id="detail-integral"><a class="nav-link"
+                                                                    href="#(CPATH)/admin/user/detail/integral/#(user.id)">
+                                <i class="fas fa-hourglass-half"></i> 积分 </a></li>
+                            #end
+
+                        </ul>
+                    </div>
+                    <!-- /.card-body -->
+                </div>
+
+            </div>
+            <!-- /.col -->
+            <div class="col-md-10">
+                <div class="card card-outline card-primary">
+                    #@detail?()
+                </div>
+            </div>
+            <!-- /.col -->
+        </div>
+        <!-- /.row -->
+
+    </section>
+
+#end
+#end

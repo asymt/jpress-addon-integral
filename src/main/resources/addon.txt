@@ -1,0 +1,7 @@
+id=com.asymt.addon.integral
+title=用户积分插件
+description=JPress用户积分扩展功能
+author=喻名堂
+authorWebsite=https://www.asymt.com
+version=1.0.1
+versionCode=1
