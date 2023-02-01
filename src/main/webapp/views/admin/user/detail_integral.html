@@ -1,0 +1,79 @@
+#include("_user_detail_layout.html")
+#@user_detail_layout("detail-integral")
+#define detail()
+<div class="card-header">
+    <form class=" admin-search-panel" action="" method="get">
+        <div class="row">
+            <div class="form-group col-lg-2">
+                <input type="text"
+                       data-range="true"
+                       data-multiple-dates-separator=" ~ "
+                       data-language="zh"
+                       class="form-control date" placeholder="过期时间开始 ~ 结束" name="dateRange"
+                       value="#para('dateRange')">
+            </div>
+            <div class="form-group col-lg-2">
+                <select class="form-control" name="type">
+                    <option value="">积分类型</option>
+                    <option value="1" #selectedIf(1== numberPara(
+                    'type'))>新增</option>
+                    <option value="2" #selectedIf(2== numberPara(
+                    'type'))>消耗</option>
+                    <option value="3" #selectedIf(3== numberPara(
+                    'type'))>过期</option>
+                </select>
+            </div>
+
+            <div class="form-group col-lg-2">
+                <button type="submit" class="btn btn-primary ">查询</button>
+                <button type="reset" class="btn btn-default">重置</button>
+            </div>
+            <div class="col-lg-6">
+                <div class=" float-sm-right" >
+                    <a href="#" type="button" class="btn btn-primary" open-type="layer"
+                       data-layer-title="添加积分"
+                       data-layer-content="#(CPATH)/commons/select/user"
+                       data-layer-end="reload"><i class="fas fa-plus"></i>添加</a>
+                </div>
+            </div>
+        </div>
+    </form>
+
+    <!-- /.card-body -->
+</div> <!-- /.card-body -->
+<div class="card-body p-0">
+
+    <table class="table table-striped">
+        <tbody>
+        <tr>
+            <th style="width: 15%">创建时间</th>
+            <th style="width: 15%">过期时间</th>
+            <th style="width: 10%">类型</th>
+            <th style="width: 10%">积分</th>
+            <th style="width: 50%">备注</th>
+        </tr>
+
+        #for(integralDetail : page.list)
+        <tr>
+            <td>#date(integralDetail.created,'yyyy-MM-dd HH:mm:ss')</td>
+            <td>#date(integralDetail.expire ??,'yyyy-MM-dd HH:mm:ss')</td>
+            <td>#(integralDetail.getTypeStr() ??)</td>
+            <td>#(integralDetail.integral ??)</td>
+            <td>#(integralDetail.remark ??)</td>
+        </tr>
+        #end
+
+        </tbody>
+    </table>
+</div>
+
+<div class="card-footer">
+    <div class="row">
+        <div class="col-sm-12">
+            #@_paginate()
+        </div>
+    </div>
+</div>
+
+#end
+

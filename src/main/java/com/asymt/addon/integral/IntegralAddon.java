@@ -1,10 +1,9 @@
 package com.asymt.addon.integral;
 
+import com.jfinal.log.Log;
 import io.jpress.core.addon.AddonBase;
 import io.jpress.core.addon.AddonInfo;
 import io.jpress.core.addon.AddonUtil;
-import io.jpress.core.menu.MenuGroup;
-import io.jpress.core.menu.MenuManager;
 
 import java.sql.SQLException;
 
@@ -12,12 +11,13 @@ import java.sql.SQLException;
  *用户积分插件
  */
 public class IntegralAddon extends AddonBase  {
-
+    private final static Log LOG = Log.getLog(IntegralAddon.class);
 
     @Override
     public void onInstall(AddonInfo addonInfo) {
         try {
             AddonUtil.execSqlFile(addonInfo, "sql/install.sql");
+            LOG.info("插件《{}》安装完成！",addonInfo.getTitle());
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
@@ -28,6 +28,7 @@ public class IntegralAddon extends AddonBase  {
     public void onUninstall(AddonInfo addonInfo) {
         try {
             AddonUtil.execSqlFile(addonInfo, "sql/uninstall.sql");
+            LOG.info("插件《{}》卸载完成！",addonInfo.getTitle());
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
@@ -36,13 +37,10 @@ public class IntegralAddon extends AddonBase  {
     @Override
     public void onStart(AddonInfo addonInfo) {
         /**
-         * 删除系统菜单，用于添加增强后的同类型菜单
-         */
-        MenuManager.me().deleteMenuItem("用户管理--/admin/user/list");
-        /**
          *  添加菜单到后台
          */
 
+        LOG.info("插件《{}》启动完成！",addonInfo.getTitle());
 
     }
 
@@ -52,7 +50,7 @@ public class IntegralAddon extends AddonBase  {
         /**
          *  删除添加的菜单
          */
-        MenuManager.me().deleteMenuGroup("message");
+        LOG.info("插件《{}》停止完成！",addonInfo.getTitle());
 
     }
 }

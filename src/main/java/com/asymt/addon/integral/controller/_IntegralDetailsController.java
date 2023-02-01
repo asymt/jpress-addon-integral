@@ -29,39 +29,7 @@ public class _IntegralDetailsController extends AdminControllerBase {
         setAttr("user", user);
         Page<IntegralDetails> entries= integralDetailsService._paginateByUserId(getPagePara(), getPageSizePara(),user.getId());
         setAttr("page", entries);
-        render("user/integral_details_list.html");
+        render("user/detail_integral.html");
     }
 
-    public void edit() {
-        int entryId = getParaToInt(0, 0);
-//        JpressAddonMessage entry = entryId > 0 ? service.findById(entryId) : null;
-//        setAttr("jpressAddonMessage", entry);
-//        render("jpress_addon_message_edit.html");
-    }
-
-
-    public void doSave() {
-//        JpressAddonMessage entry = getModel(JpressAddonMessage.class,"jpressAddonMessage");
-//        service.saveOrUpdate(entry);
-//        renderJson(Ret.ok().set("id", entry.getId()));
-    }
-
-
-
-    public void doDel() {
-        Long id = getIdPara();
-        render(integralDetailsService.deleteById(id) ? Ret.ok() : Ret.fail());
-    }
-
-
-    @EmptyValidate(@Form(name = "ids"))
-    public void doDelByIds() {
-        Set<String> idsSet = getParaSet("ids");
-        if (integralDetailsService.batchDeleteByIds(idsSet.toArray())){
-            for (String id : idsSet){
-                integralDetailsService.deleteById(Long.valueOf(id));
-            }
-        }
-        renderOkJson();
-    }
 }
