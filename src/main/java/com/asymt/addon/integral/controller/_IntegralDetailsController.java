@@ -1,33 +1,36 @@
 package com.asymt.addon.integral.controller;
 
-import com.asymt.addon.integral.model.IntegralAvailables;
-import com.asymt.addon.integral.service.IntegralAvailablesService;
+import com.asymt.addon.integral.commons.IntegralConsts;
+import com.asymt.addon.integral.model.IntegralDetails;
+import com.asymt.addon.integral.service.IntegralDetailsService;
 import com.jfinal.aop.Inject;
 import com.jfinal.kit.Ret;
 import com.jfinal.plugin.activerecord.Page;
 import io.jboot.web.controller.annotation.RequestMapping;
 import io.jboot.web.validate.EmptyValidate;
 import io.jboot.web.validate.Form;
-import io.jpress.JPressConsts;
-import io.jpress.core.menu.annotation.AdminMenu;
+import io.jpress.model.User;
+import io.jpress.service.UserService;
 import io.jpress.web.base.AdminControllerBase;
 
 import java.util.Set;
 
-@RequestMapping(value = "/admin/integral/jpress_addon_integral", viewPath = "/views/admin")
-public class _IntegralAvailablesController extends AdminControllerBase {
+@RequestMapping(value = "/admin/user/detail", viewPath = IntegralConsts.DEFAULT_ADMIN_VIEW)
+public class _IntegralDetailsController extends AdminControllerBase {
 
     @Inject
-    private IntegralAvailablesService service;
+    private IntegralDetailsService integralDetailsService;
+    @Inject
+    private UserService userService;
 
-
-    @AdminMenu(text = "可用积分列表", groupId = JPressConsts.SYSTEM_MENU_USER)
-    public void list() {
-        Page<IntegralAvailables> entries=service.paginate(getPagePara(), 10);
+    public void integral(){
+        Long uid = getParaToLong();
+        User user = userService.findById(uid);
+        setAttr("user", user);
+        Page<IntegralDetails> entries= integralDetailsService._paginateByUserId(getPagePara(), getPageSizePara(),user.getId());
         setAttr("page", entries);
-        render("jpress_addon_integral_available_list.html");
+        render("user/integral_details_list.html");
     }
-
 
     public void edit() {
         int entryId = getParaToInt(0, 0);
@@ -47,16 +50,16 @@ public class _IntegralAvailablesController extends AdminControllerBase {
 
     public void doDel() {
         Long id = getIdPara();
-        render(service.deleteById(id) ? Ret.ok() : Ret.fail());
+        render(integralDetailsService.deleteById(id) ? Ret.ok() : Ret.fail());
     }
 
 
     @EmptyValidate(@Form(name = "ids"))
     public void doDelByIds() {
         Set<String> idsSet = getParaSet("ids");
-        if (service.batchDeleteByIds(idsSet.toArray())){
+        if (integralDetailsService.batchDeleteByIds(idsSet.toArray())){
             for (String id : idsSet){
-                service.deleteById(Long.valueOf(id));
+                integralDetailsService.deleteById(Long.valueOf(id));
             }
         }
         renderOkJson();

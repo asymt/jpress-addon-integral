@@ -98,15 +98,15 @@ public abstract class BaseIntegralDetails<M extends BaseIntegralDetails<M>> exte
     /**
      * 积分类型(1：新增积分，2：消耗积分，3：过期积分)
      */
-	public void setType(Boolean type) {
+	public void setType(Integer type) {
 		set("type", type);
 	}
 
     /**
      * 积分类型(1：新增积分，2：消耗积分，3：过期积分)
      */
-	public Boolean getType() {
-		return getBoolean("type");
+	public Integer getType() {
+		return getInt("type");
 	}
 
 }

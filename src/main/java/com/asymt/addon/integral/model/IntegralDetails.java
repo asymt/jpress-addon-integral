@@ -11,6 +11,14 @@ public class IntegralDetails extends BaseIntegralDetails<IntegralDetails> {
 
     private static final long serialVersionUID = 1L;
 
-	
+    public String getTypeStr(){
+        switch (getType()){
+            case 1: return "新增";
+            case 2: return "消耗";
+            case 3: return "过期";
+            default: return "";
+        }
+    }
+
 }
 
