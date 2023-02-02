@@ -175,5 +175,4 @@ public interface IntegralDetailsService  {
     public Page<IntegralDetails> paginateByColumns(int page, int pageSize, Columns columns, String orderBy);
 
 
-    Page<IntegralDetails> _paginateByUserId(int page, int pagesize, long userId);
 }

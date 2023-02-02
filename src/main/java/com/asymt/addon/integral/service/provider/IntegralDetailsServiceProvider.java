@@ -11,8 +11,4 @@ import io.jpress.commons.service.JPressServiceBase;
 public class IntegralDetailsServiceProvider extends JPressServiceBase<IntegralDetails> implements IntegralDetailsService {
 
 
-    @Override
-    public Page<IntegralDetails> _paginateByUserId(int page, int pagesize, long userId) {
-        return DAO.paginateByColumn(page, pagesize, Column.create("user_id", userId), "created desc");
-    }
 }
