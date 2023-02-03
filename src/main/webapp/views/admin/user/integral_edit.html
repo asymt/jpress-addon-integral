@@ -29,19 +29,20 @@
                           method="post"
                           data-ok-function="saveSuccess"
                           action="#(CPATH)/user/integral/doAdd">
+                        <input type="hidden" name="integralDetails.userId" value="#(userId)">
                         <input type="hidden" name="integralDetails.type" value="1">
                         <div class="form-group row">
                             <label class="col-2 col-form-label">积分</label>
                             <div class="col-8">
                                 <input type="number" class="form-control" placeholder="积分值"
-                                       name="integralDetails.integral">
+                                       name="integralDetails.integral" value="1" required min="1">
                             </div>
                         </div>
                         <div class="form-group row">
                             <label class="col-2 col-form-label">过期时间</label>
                             <div class="col-8">
-                                <input type="text" class="form-control date" placeholder="过期时间"
-                                       name="integralDetails.expire" data-auto-close="true" data-language="zh" data-date-format="yyyy-mm-dd">
+                                <input type="text" class="form-control date" required placeholder="过期时间"
+                                       name="integralDetails.expire" data-auto-close="true" data-min-date="new date()" data-language="zh" data-date-format="yyyy-mm-dd">
                             </div>
                         </div>
                         <div class="form-group row">
