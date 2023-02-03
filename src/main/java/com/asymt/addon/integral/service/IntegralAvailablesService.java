@@ -175,4 +175,5 @@ public interface IntegralAvailablesService  {
     public Page<IntegralAvailables> paginateByColumns(int page, int pageSize, Columns columns, String orderBy);
 
 
+    void countIntegral(Integer userId);
 }

@@ -42,7 +42,7 @@
                             <label class="col-2 col-form-label">过期时间</label>
                             <div class="col-8">
                                 <input type="text" class="form-control date" required placeholder="过期时间"
-                                       name="integralDetails.expire" data-auto-close="true" data-min-date="new date()" data-language="zh" data-date-format="yyyy-mm-dd">
+                                       name="integralDetails.expire" data-auto-close="true" data-min-date="#(currentDate.getTime())" data-language="zh" data-date-format="yyyy-mm-dd">
                             </div>
                         </div>
                         <div class="form-group row">

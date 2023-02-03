@@ -30,6 +30,7 @@ CREATE INDEX id_index ON integral_availables(id);
 DROP TABLE IF EXISTS user_integral;
 CREATE TABLE user_integral(
                               `user_id` INT(11) NOT NULL   COMMENT '用户ID' ,
-                              `integral` INT(11) NOT NULL  DEFAULT 0 COMMENT '积分总额'
+                              `integral` INT(11) NOT NULL  DEFAULT 0 COMMENT '积分总额',
+                              primary key (user_id)
 )  COMMENT = '积分总额表' ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
