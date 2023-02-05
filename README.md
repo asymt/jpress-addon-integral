@@ -1,3 +1,3 @@
-# jpress-addon-integral
+# jpress-addon-resourcesSite
 
-jpress的用户积分插件
+用于资源站创建的扩展插件
