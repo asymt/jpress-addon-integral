@@ -1,10 +1,10 @@
-package com.asymt.addon.integral.service.provider;
+package com.asymt.addon.resourcesite.service.provider;
 
 import com.jfinal.plugin.activerecord.Db;
 import com.jfinal.plugin.activerecord.Record;
 import io.jboot.aop.annotation.Bean;
-import com.asymt.addon.integral.service.IntegralAvailablesService;
-import com.asymt.addon.integral.model.IntegralAvailables;
+import com.asymt.addon.resourcesite.service.IntegralAvailablesService;
+import com.asymt.addon.resourcesite.model.IntegralAvailables;
 import io.jpress.commons.service.JPressServiceBase;
 
 @Bean

@@ -1,4 +1,4 @@
-package com.asymt.addon.integral.commons;
+package com.asymt.addon.resourcesite.commons;
 
 /**
  * @author 王喻

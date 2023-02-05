@@ -1,4 +1,4 @@
-package com.asymt.addon.integral;
+package com.asymt.addon.resourcesite;
 
 import io.jpress.codegen.AddonGenerator;
 

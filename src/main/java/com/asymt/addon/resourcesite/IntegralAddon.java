@@ -1,4 +1,4 @@
-package com.asymt.addon.integral;
+package com.asymt.addon.resourcesite;
 
 import com.jfinal.log.Log;
 import io.jpress.core.addon.AddonBase;

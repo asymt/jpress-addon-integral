@@ -7,7 +7,7 @@ CREATE TABLE integral_details(
                                  `remark` VARCHAR(255)    COMMENT '备注' ,
                                  `created` DATETIME NOT NULL  DEFAULT now() COMMENT '创建时间' ,
                                  `expire` DATETIME    COMMENT '过期时间' ,
-                                 `type` tinyINT(1)    COMMENT '积分类型(1：新增积分，2：消耗积分，3：过期积分)' ,
+                                 `type` tinyINT(2)    COMMENT '积分类型(1：新增积分，2：消耗积分，3：过期积分)' ,
                                  PRIMARY KEY (id)
 )  COMMENT = '积分明细表' ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 

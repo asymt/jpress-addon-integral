@@ -33,7 +33,7 @@
                     <a href="#" type="button" class="btn btn-primary" open-type="layer"
                        data-layer-title="添加积分"
                        data-layer-content="#(CPATH)/user/integral/edit/#(user.id)"
-                       data-layer-area="['500px','400px']"
+                       data-layer-area="['500px','450px']"
                        data-layer-end="reload"><i class="fas fa-plus"></i>添加</a>
                 </div>
             </div>
@@ -54,7 +54,7 @@
             <th style="width: 50%">备注</th>
         </tr>
 
-        #for(integralDetail : page.list)
+        #for(integralDetail : integralDetails.list)
         <tr>
             <td>#date(integralDetail.created,'yyyy-MM-dd HH:mm:ss')</td>
             <td>#date(integralDetail.expire ??,'yyyy-MM-dd HH:mm:ss')</td>

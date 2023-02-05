@@ -1,11 +1,11 @@
-package com.asymt.addon.integral.service.provider;
+package com.asymt.addon.resourcesite.service.provider;
 
-import com.asymt.addon.integral.model.IntegralAvailables;
-import com.asymt.addon.integral.service.IntegralAvailablesService;
+import com.asymt.addon.resourcesite.model.IntegralAvailables;
+import com.asymt.addon.resourcesite.service.IntegralAvailablesService;
 import com.jfinal.aop.Inject;
 import io.jboot.aop.annotation.Bean;
-import com.asymt.addon.integral.service.IntegralDetailsService;
-import com.asymt.addon.integral.model.IntegralDetails;
+import com.asymt.addon.resourcesite.service.IntegralDetailsService;
+import com.asymt.addon.resourcesite.model.IntegralDetails;
 import io.jpress.commons.service.JPressServiceBase;
 
 @Bean

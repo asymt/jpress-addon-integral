@@ -1,23 +1,19 @@
-package com.asymt.addon.integral.controller;
+package com.asymt.addon.resourcesite.controller;
 
-import com.asymt.addon.integral.commons.IntegralConsts;
-import com.asymt.addon.integral.model.IntegralDetails;
-import com.asymt.addon.integral.service.IntegralDetailsService;
+import com.asymt.addon.resourcesite.commons.IntegralConsts;
+import com.asymt.addon.resourcesite.model.IntegralDetails;
+import com.asymt.addon.resourcesite.service.IntegralDetailsService;
 import com.jfinal.aop.Inject;
-import com.jfinal.kit.Ret;
 import com.jfinal.plugin.activerecord.Page;
 import io.jboot.db.model.Columns;
 import io.jboot.utils.DateUtil;
 import io.jboot.utils.StrUtil;
 import io.jboot.web.controller.annotation.RequestMapping;
-import io.jboot.web.validate.EmptyValidate;
-import io.jboot.web.validate.Form;
 import io.jpress.model.User;
 import io.jpress.service.UserService;
 import io.jpress.web.base.AdminControllerBase;
 
 import java.util.Date;
-import java.util.Set;
 
 @RequestMapping(value = "/admin/user/detail", viewPath = IntegralConsts.DEFAULT_ADMIN_VIEW)
 public class _IntegralDetailsController extends AdminControllerBase {
@@ -52,7 +48,7 @@ public class _IntegralDetailsController extends AdminControllerBase {
 
         columns.eq("user_id", user.getId());
         Page<IntegralDetails> entries= integralDetailsService.paginateByColumns(getPagePara(), getPageSizePara(),columns,"created desc");
-        setAttr("page", entries);
+        setAttr("integralDetails", entries);
         render("user/detail_integral.html");
     }
 

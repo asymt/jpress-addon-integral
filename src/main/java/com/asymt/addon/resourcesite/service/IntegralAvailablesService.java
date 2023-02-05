@@ -1,7 +1,7 @@
-package com.asymt.addon.integral.service;
+package com.asymt.addon.resourcesite.service;
 
 import com.jfinal.plugin.activerecord.Page;
-import com.asymt.addon.integral.model.IntegralAvailables;
+import com.asymt.addon.resourcesite.model.IntegralAvailables;
 import io.jboot.db.model.Columns;
 
 import java.util.List;
