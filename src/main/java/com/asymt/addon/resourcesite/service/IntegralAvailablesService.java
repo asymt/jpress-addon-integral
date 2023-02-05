@@ -175,5 +175,9 @@ public interface IntegralAvailablesService  {
     public Page<IntegralAvailables> paginateByColumns(int page, int pageSize, Columns columns, String orderBy);
 
 
+    /**
+     * 统计用户的积分总额
+     * @param userId
+     */
     void countIntegral(Integer userId);
 }

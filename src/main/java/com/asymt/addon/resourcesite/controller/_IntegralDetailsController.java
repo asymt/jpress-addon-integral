@@ -4,7 +4,10 @@ import com.asymt.addon.resourcesite.commons.IntegralConsts;
 import com.asymt.addon.resourcesite.model.IntegralDetails;
 import com.asymt.addon.resourcesite.service.IntegralDetailsService;
 import com.jfinal.aop.Inject;
+import com.jfinal.kit.Ret;
+import com.jfinal.log.Log;
 import com.jfinal.plugin.activerecord.Page;
+import io.jboot.aop.annotation.Transactional;
 import io.jboot.db.model.Columns;
 import io.jboot.utils.DateUtil;
 import io.jboot.utils.StrUtil;
@@ -17,7 +20,7 @@ import java.util.Date;
 
 @RequestMapping(value = "/admin/user/detail", viewPath = IntegralConsts.DEFAULT_ADMIN_VIEW)
 public class _IntegralDetailsController extends AdminControllerBase {
-
+    private static final Log LOG = Log.getLog(_IntegralDetailsController.class);
     @Inject
     private IntegralDetailsService integralDetailsService;
     @Inject
@@ -50,6 +53,32 @@ public class _IntegralDetailsController extends AdminControllerBase {
         Page<IntegralDetails> entries= integralDetailsService.paginateByColumns(getPagePara(), getPageSizePara(),columns,"created desc");
         setAttr("integralDetails", entries);
         render("user/detail_integral.html");
+    }
+
+    public void integralEdit() {
+        Long uid = getParaToLong();
+        setAttr("userId", uid);
+        setAttr("currentDate", new Date());
+        render("user/integral_edit.html");
+    }
+
+    @Transactional(rollbackForRetFail = true)
+    public Ret doAdd(){
+        IntegralDetails integralDetails=getBean(IntegralDetails.class);
+        if(integralDetails.getIntegral()==null || integralDetails.getIntegral()<1){
+            return Ret.fail().set("message", "积分不能为空且不能小于1").set("errorCode", 3);
+        }
+        if(integralDetails.getExpire()==null || !DateUtil.isAfter(integralDetails.getExpire(),new Date())){
+            return Ret.fail().set("message", "过期时间不能为空且必须是以后的时间").set("errorCode", 4);
+        }
+        integralDetails.setCreated(new Date());
+        try {
+            integralDetailsService.add(integralDetails);
+        }catch (Exception e){
+            LOG.error("添加积分失败！",e);
+            return Ret.fail().set("message","添加积分失败！").set("errorCode",5);
+        }
+        return Ret.ok();
     }
 
 }

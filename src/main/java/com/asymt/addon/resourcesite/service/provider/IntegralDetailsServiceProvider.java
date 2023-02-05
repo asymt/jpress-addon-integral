@@ -30,4 +30,8 @@ public class IntegralDetailsServiceProvider extends JPressServiceBase<IntegralDe
         integralAvailables.setUserId(integralDetails.getUserId());
         return integralAvailables;
     }
+
+    public void consumeIntegral(Integer userId,Integer integral,String remark){
+
+    }
 }

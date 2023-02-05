@@ -175,5 +175,10 @@ public interface IntegralDetailsService  {
     public Page<IntegralDetails> paginateByColumns(int page, int pageSize, Columns columns, String orderBy);
 
 
+    /**
+     * 添加积分
+     * @param integralDetails
+     * @return
+     */
     Object add(IntegralDetails integralDetails);
 }
