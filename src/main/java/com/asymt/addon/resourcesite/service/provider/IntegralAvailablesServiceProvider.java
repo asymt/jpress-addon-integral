@@ -25,29 +25,11 @@ public class IntegralAvailablesServiceProvider extends JPressServiceBase<Integra
         if(sumIntegral==null){
             Db.deleteById(integralTableName, userIntegralPrimaryKey,userId);
         }else {
-            Record userIntegral=Db.findByIds(integralTableName,userIntegralPrimaryKey,userId);
+            Record userIntegral=Db.findById(integralTableName,userIntegralPrimaryKey,userId);
             if(userIntegral==null){
                 Db.save(integralTableName,new Record().set(userIntegralPrimaryKey,userId).set("integral",sumIntegral));
             }else {
                 Db.update(integralTableName,userIntegralPrimaryKey,userIntegral);
-            }
-        }
-    }
-
-    public void consumeIntegral(@NotNull Integer userId, @NotNull Integer integral){
-        Columns columns=Columns.create("user_id",userId);
-        List<IntegralAvailables> deleteList = new ArrayList<>();
-        int consumeSum=0;
-        int pageNumber=1;
-        Page<IntegralAvailables> integralList = DAO.paginateByColumns(pageNumber,10,columns,"expire asc");
-        for (IntegralAvailables integralAvailables : integralList.getList()) {
-            int newSum=consumeSum+integralAvailables.getIntegral();
-            if(newSum<=integral){
-                deleteList.add(integralAvailables);
-                consumeSum=newSum;
-            }else {
-
-                break;
             }
         }
     }

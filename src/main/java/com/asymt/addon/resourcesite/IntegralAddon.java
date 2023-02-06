@@ -1,6 +1,8 @@
 package com.asymt.addon.resourcesite;
 
 import com.jfinal.log.Log;
+import com.jfinal.template.source.FileSourceFactory;
+import io.jboot.db.datasource.DataSourceConfigManager;
 import io.jpress.core.addon.AddonBase;
 import io.jpress.core.addon.AddonInfo;
 import io.jpress.core.addon.AddonUtil;
@@ -36,6 +38,12 @@ public class IntegralAddon extends AddonBase  {
 
     @Override
     public void onStart(AddonInfo addonInfo) {
+        /**
+         * 添加sql模板
+         */
+        addonInfo.getArp().stop();
+        addonInfo.getArp().addSqlTemplate(new FileSourceFactory().getSource(AddonUtil.getAddonBasePath(addonInfo.getId()),"/sqlTemplate/all.sql",addonInfo.getArp().getEngine().getEncoding()));
+        addonInfo.getArp().start();
         /**
          *  添加菜单到后台
          */
