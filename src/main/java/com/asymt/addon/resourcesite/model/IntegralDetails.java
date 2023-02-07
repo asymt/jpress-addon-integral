@@ -10,6 +10,10 @@ import com.asymt.addon.resourcesite.model.base.BaseIntegralDetails;
 public class IntegralDetails extends BaseIntegralDetails<IntegralDetails> {
     private static final long serialVersionUID = 1L;
 
+    public static final int ADD_TYPE=1;
+    public static final int CONSUME_TYPE=2;
+    public static final int EXPIRE_TYPE=3;
+
     public String getTypeStr(){
         switch (getType()){
             case 1: return "新增";

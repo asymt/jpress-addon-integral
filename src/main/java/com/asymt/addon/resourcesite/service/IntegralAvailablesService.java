@@ -176,8 +176,13 @@ public interface IntegralAvailablesService  {
 
 
     /**
-     * 统计用户的积分总额
+     * 统计更新用户的积分总额
      * @param userId
      */
-    void countIntegral(Integer userId);
+    void updateUserIntegral(Integer userId);
+
+    /**
+     * 过期用户积分
+     */
+    void expireIntegral();
 }

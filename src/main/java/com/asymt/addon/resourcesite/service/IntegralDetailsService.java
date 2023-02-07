@@ -1,7 +1,9 @@
 package com.asymt.addon.resourcesite.service;
 
+import com.asymt.addon.resourcesite.model.IntegralAvailables;
 import com.jfinal.plugin.activerecord.Page;
 import com.asymt.addon.resourcesite.model.IntegralDetails;
+import io.jboot.aop.annotation.Transactional;
 import io.jboot.db.model.Columns;
 
 import java.util.List;
@@ -181,4 +183,11 @@ public interface IntegralDetailsService  {
      * @return
      */
     Object add(IntegralDetails integralDetails);
+
+    Object add(Integer userId, Integer integral, String remark);
+
+    boolean addExpireIntegralDetails(List<IntegralAvailables> expireIntegrals);
+
+    @Transactional
+    void consumeIntegral(Integer userId, Integer integral, String remark);
 }
