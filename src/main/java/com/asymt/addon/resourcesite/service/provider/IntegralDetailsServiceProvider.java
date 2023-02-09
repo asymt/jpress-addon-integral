@@ -1,5 +1,6 @@
 package com.asymt.addon.resourcesite.service.provider;
 
+import com.asymt.addon.resourcesite.AddonDb;
 import com.asymt.addon.resourcesite.model.IntegralAvailables;
 import com.asymt.addon.resourcesite.service.IntegralAvailablesService;
 import com.jfinal.aop.Inject;
@@ -22,6 +23,7 @@ public class IntegralDetailsServiceProvider extends JPressServiceBase<IntegralDe
 
     @Inject
     IntegralAvailablesService integralAvailablesService;
+    @Transactional
     @Override
     public Object add(IntegralDetails integralDetails){
         // 转换出一个可用积分对象然后保存
@@ -103,7 +105,7 @@ public class IntegralDetailsServiceProvider extends JPressServiceBase<IntegralDe
     @Transactional
     public void consumeIntegral(Integer userId, Integer integral, String remark){
         // 先判断用户总积分是否足够消费
-        Integer userIntegral=Db.template("integral.queryUserIntegral",userId).queryInt();
+        Integer userIntegral= AddonDb.use().template("integral.queryUserIntegral",userId).queryInt();
         if(userIntegral==null || userIntegral<integral){
             throw new RuntimeException(String.format("您当前剩余积分%s，小于当前操作所需积分%s",userIntegral,integral));
         }

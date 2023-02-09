@@ -1,11 +1,17 @@
 package com.asymt.addon.resourcesite;
 
+import com.asymt.addon.resourcesite.interceptor.UserManagerInterceptor;
+import com.asymt.addon.resourcesite.task.ExpireIntegralTask;
 import com.jfinal.log.Log;
 import com.jfinal.template.source.FileSourceFactory;
+import com.jfinal.template.source.ISource;
+import io.jboot.components.schedule.JbootScheduleManager;
 import io.jboot.db.datasource.DataSourceConfigManager;
 import io.jpress.core.addon.AddonBase;
 import io.jpress.core.addon.AddonInfo;
 import io.jpress.core.addon.AddonUtil;
+import javassist.ClassClassPath;
+import javassist.ClassPool;
 
 import java.sql.SQLException;
 
@@ -38,12 +44,21 @@ public class IntegralAddon extends AddonBase  {
 
     @Override
     public void onStart(AddonInfo addonInfo) {
+        AddonDb.setConfigName(addonInfo.getId());
         /**
-         * 添加sql模板
+         * 添加sql模板,多次停止启用也只添加一次
          */
-        addonInfo.getArp().stop();
-        addonInfo.getArp().addSqlTemplate(new FileSourceFactory().getSource(AddonUtil.getAddonBasePath(addonInfo.getId()),"/sqlTemplate/all.sql",addonInfo.getArp().getEngine().getEncoding()));
-        addonInfo.getArp().start();
+        ISource sqlTemplateSource=new FileSourceFactory().getSource(AddonUtil.getAddonBasePath(addonInfo.getId()),"/sqlTemplate/all.sql",addonInfo.getArp().getEngine().getEncoding());
+        if(addonInfo.getArp()!=null&&addonInfo.getArp().getSqlKit().getSqlMapEntrySet().isEmpty()) {
+            addonInfo.getArp().stop();
+            addonInfo.getArp().addSqlTemplate(sqlTemplateSource);
+            addonInfo.getArp().start();
+        }
+        /**
+         * 添加自动过期积分的任务
+         */
+        JbootScheduleManager.me().addSchedule(ExpireIntegralTask.class);
+
         /**
          *  添加菜单到后台
          */
