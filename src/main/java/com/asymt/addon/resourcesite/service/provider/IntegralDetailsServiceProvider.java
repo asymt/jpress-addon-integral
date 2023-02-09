@@ -105,7 +105,7 @@ public class IntegralDetailsServiceProvider extends JPressServiceBase<IntegralDe
     @Transactional
     public void consumeIntegral(Integer userId, Integer integral, String remark){
         // 先判断用户总积分是否足够消费
-        Integer userIntegral= AddonDb.use().template("integral.queryUserIntegral",userId).queryInt();
+        Integer userIntegral= AddonDb.getDbPro().template("integral.queryUserIntegral",userId).queryInt();
         if(userIntegral==null || userIntegral<integral){
             throw new RuntimeException(String.format("您当前剩余积分%s，小于当前操作所需积分%s",userIntegral,integral));
         }

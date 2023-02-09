@@ -22,7 +22,7 @@ public class IntegralAvailablesServiceProvider extends JPressServiceBase<Integra
     IntegralDetailsService integralDetailsService;
     @Override
     public void updateUserIntegral(Integer userId){
-        Integer sumIntegral= AddonDb.use().template("integral.queryAvailablesIntegralSum",userId).queryInt();
+        Integer sumIntegral= AddonDb.getDbPro().template("integral.queryAvailablesIntegralSum",userId).queryInt();
         String integralTableName="user_integral";
         String userIntegralPrimaryKey="user_id";
         if(sumIntegral==null){
@@ -46,7 +46,7 @@ public class IntegralAvailablesServiceProvider extends JPressServiceBase<Integra
         if(expireList!=null&&expireList.size()>0){
             DAO.deleteByColumns(columns);
             integralDetailsService.addExpireIntegralDetails(expireList);
-            String sql=AddonDb.use().getSql("integral.updateAllUserIntegral");
+            String sql=AddonDb.getDbPro().getSql("integral.updateAllUserIntegral");
             Db.update(sql);
         }
     }

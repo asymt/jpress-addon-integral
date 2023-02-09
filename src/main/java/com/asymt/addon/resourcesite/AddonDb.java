@@ -14,7 +14,7 @@ public class AddonDb{
         AddonDb.configName=configName;
     }
 
-    public static DbPro use(){
+    public static DbPro getDbPro(){
         return Db.use(configName);
     }
 
