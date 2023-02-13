@@ -8,10 +8,10 @@ public class Codegen {
     private static String dbUser = "3dresources";
     private static String dbPassword = "123456";
 
-    private static String addonName = "integral";
-    private static String dbTables = "integral_availables,integral_details,user_integral";
-    private static String modelPackage = "com.asymt.addon.integral.model";
-    private static String servicePackage = "com.asymt.addon.integral.service";
+    private static String addonName = "resourcesSite";
+    private static String dbTables = "material_extend,slide";
+    private static String modelPackage = "com.asymt.addon.resourcesite.model";
+    private static String servicePackage = "com.asymt.addon.resourcesite.service";
 
 
     public static void main(String[] args) {

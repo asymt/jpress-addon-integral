@@ -34,3 +34,45 @@ CREATE TABLE user_integral(
                               primary key (user_id)
 )  COMMENT = '积分总额表' ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+
+DROP TABLE IF EXISTS user_article_collect;
+CREATE TABLE user_article_collect(
+                                     `user_id` INT(11) NOT NULL   COMMENT '用户ID' ,
+                                     `article_id` INT(11) NOT NULL   COMMENT '文章ID' ,
+                                     PRIMARY KEY (user_id,article_id)
+)  COMMENT = '文章收藏表'  ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+DROP TABLE IF EXISTS user_resource_download;
+CREATE TABLE user_resource_download(
+                                       `user_id` INT(11) NOT NULL   COMMENT '用户ID' ,
+                                       `article_id` INT(11) NOT NULL   COMMENT '文章ID' ,
+                                       `count` INT(11) NOT NULL  DEFAULT 1 COMMENT '下载次数' ,
+                                       PRIMARY KEY (user_id,article_id)
+)  COMMENT = '资源下载记录表'  ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+DROP TABLE IF EXISTS user_article_like;
+CREATE TABLE user_article_like(
+                                  `user_id` INT(11) NOT NULL   COMMENT '用户ID' ,
+                                  `article_id` INT(11) NOT NULL   COMMENT '文章ID' ,
+                                  PRIMARY KEY (user_id,article_id)
+)  COMMENT = '文章赞赏表'  ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+DROP TABLE IF EXISTS material_extend;
+CREATE TABLE material_extend(
+                                `article_id` INT(11) NOT NULL   COMMENT '文章ID' ,
+                                `source` tinyINT(2) NOT NULL   COMMENT '素材来源,1：原创，2：转载' ,
+                                `download_count` INT(11) NOT NULL  DEFAULT 0 COMMENT '下载量' ,
+                                `url` VARCHAR(300)    COMMENT '素材下载地址' ,
+                                PRIMARY KEY (article_id)
+)  COMMENT = '素材扩展'  ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+DROP TABLE IF EXISTS slide;
+CREATE TABLE slide(
+                      `id` INT(11) NOT NULL AUTO_INCREMENT  COMMENT '主键ID' ,
+                      `order_no` INT(11) NOT NULL  DEFAULT 0 COMMENT '排序号' ,
+                      `img` VARCHAR(500) NOT NULL   COMMENT '图片路径' ,
+                      `target_url` VARCHAR(500) NOT NULL   COMMENT '跳转链接' ,
+                      `created` DATETIME NOT NULL   COMMENT '创建日期' ,
+                      PRIMARY KEY (id)
+)  COMMENT = '幻灯片'  ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
