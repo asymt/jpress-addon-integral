@@ -7,5 +7,8 @@ import io.jpress.commons.service.JPressServiceBase;
 
 @Bean
 public class MaterialExtendServiceProvider extends JPressServiceBase<MaterialExtend> implements MaterialExtendService {
-
+    @Override
+    public Object saveOrUpdate(MaterialExtend model) {
+        return super.saveOrUpdate(model);
+    }
 }

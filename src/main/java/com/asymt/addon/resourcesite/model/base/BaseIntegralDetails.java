@@ -14,29 +14,29 @@ public abstract class BaseIntegralDetails<M extends BaseIntegralDetails<M>> exte
     /**
      * 主键ID
      */
-	public void setId(Integer id) {
+	public void setId(Long id) {
 		set("id", id);
 	}
 
     /**
      * 主键ID
      */
-	public Integer getId() {
-		return getInt("id");
+	public Long getId() {
+		return getLong("id");
 	}
 
     /**
      * 用户ID
      */
-	public void setUserId(Integer userId) {
+	public void setUserId(Long userId) {
 		set("user_id", userId);
 	}
 
     /**
      * 用户ID
      */
-	public Integer getUserId() {
-		return getInt("user_id");
+	public Long getUserId() {
+		return getLong("user_id");
 	}
 
     /**

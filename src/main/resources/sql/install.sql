@@ -59,11 +59,10 @@ CREATE TABLE user_article_like(
 
 DROP TABLE IF EXISTS material_extend;
 CREATE TABLE material_extend(
-                                `article_id` INT(11) NOT NULL   COMMENT '文章ID' ,
+                                `article_id` INT(11) NOT NULL unique  COMMENT '文章ID' ,
                                 `source` tinyINT(2) NOT NULL   COMMENT '素材来源,1：原创，2：转载' ,
                                 `download_count` INT(11) NOT NULL  DEFAULT 0 COMMENT '下载量' ,
-                                `url` VARCHAR(300)    COMMENT '素材下载地址' ,
-                                PRIMARY KEY (article_id)
+                                `url` VARCHAR(300)    COMMENT '素材下载地址'
 )  COMMENT = '素材扩展'  ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 DROP TABLE IF EXISTS slide;

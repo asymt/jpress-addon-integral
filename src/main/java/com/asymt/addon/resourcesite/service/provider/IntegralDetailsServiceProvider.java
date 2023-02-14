@@ -36,7 +36,7 @@ public class IntegralDetailsServiceProvider extends JPressServiceBase<IntegralDe
 
     @Transactional
     @Override
-    public Object add(Integer userId, Integer integral, String remark){
+    public Object add(Long userId, Integer integral, String remark){
         Date currentDate=new Date();
         IntegralDetails integralDetails=new IntegralDetails();
         integralDetails.setExpire(DateUtil.addYears(currentDate,1));
@@ -130,11 +130,11 @@ public class IntegralDetailsServiceProvider extends JPressServiceBase<IntegralDe
                     integralAvailables.setIntegral(redundantIntegral);
                     integralAvailablesService.save(integralAvailables);
                     integralAvailables.setIntegral(partOfConsumeIntegral);
-                    integralAvailables.setId(-1);
+                    integralAvailables.setId((long) -1);
                 }
                 //根据消费的可用积分生成积分消费明细
                 if(consumeList.size()>0) {
-                    integralAvailablesService.batchDeleteByIds(consumeList.stream().mapToInt(IntegralAvailables::getId).toArray());
+                    integralAvailablesService.batchDeleteByIds(consumeList.stream().mapToLong(IntegralAvailables::getId).toArray());
                     List<IntegralDetails> consumeDetails=toIntegralDetails(consumeList,IntegralDetails.CONSUME_TYPE, remark);
                     if(consumeDetails.size()>0){
                         Db.batchSave(consumeDetails,consumeDetails.size());

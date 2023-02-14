@@ -184,7 +184,7 @@ public interface IntegralDetailsService  {
      */
     Object add(IntegralDetails integralDetails);
 
-    Object add(Integer userId, Integer integral, String remark);
+    Object add(Long userId, Integer integral, String remark);
 
     boolean addExpireIntegralDetails(List<IntegralAvailables> expireIntegrals);
 

@@ -21,7 +21,7 @@ public class IntegralAvailablesServiceProvider extends JPressServiceBase<Integra
     @Inject
     IntegralDetailsService integralDetailsService;
     @Override
-    public void updateUserIntegral(Integer userId){
+    public void updateUserIntegral(Long userId){
         Integer sumIntegral= AddonDb.getDbPro().template("integral.queryAvailablesIntegralSum",userId).queryInt();
         String integralTableName="user_integral";
         String userIntegralPrimaryKey="user_id";

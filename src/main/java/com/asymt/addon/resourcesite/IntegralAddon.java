@@ -1,5 +1,6 @@
 package com.asymt.addon.resourcesite;
 
+import com.asymt.addon.resourcesite.interceptor.ArticleOperationInterceptor;
 import com.asymt.addon.resourcesite.interceptor.UserManagerInterceptor;
 import com.asymt.addon.resourcesite.task.ExpireIntegralTask;
 import com.jfinal.log.Log;
@@ -11,6 +12,7 @@ import io.jpress.core.addon.AddonBase;
 import io.jpress.core.addon.AddonInfo;
 import io.jpress.core.addon.AddonUtil;
 import javassist.ClassClassPath;
+import javassist.ClassPath;
 import javassist.ClassPool;
 
 import java.sql.SQLException;
@@ -21,6 +23,7 @@ import java.sql.SQLException;
 public class IntegralAddon extends AddonBase  {
     private final static Log LOG = Log.getLog(IntegralAddon.class);
 
+    private ClassPath[] interceptorClassPaths={new ClassClassPath(UserManagerInterceptor.class),new ClassClassPath(ArticleOperationInterceptor.class)};
     @Override
     public void onInstall(AddonInfo addonInfo) {
         try {
@@ -59,6 +62,12 @@ public class IntegralAddon extends AddonBase  {
          */
         JbootScheduleManager.me().addSchedule(ExpireIntegralTask.class);
 
+
+        /**
+         * 添加classpath到ClassPool中
+         */
+        insertClassPath();
+
         /**
          *  添加菜单到后台
          */
@@ -67,8 +76,25 @@ public class IntegralAddon extends AddonBase  {
 
     }
 
+    private void insertClassPath(){
+        for (ClassPath interceptorClassPath : interceptorClassPaths) {
+            ClassPool.getDefault().insertClassPath(interceptorClassPath);
+        }
+    }
+
+    private void removeClassPath(){
+        for (ClassPath interceptorClassPath : interceptorClassPaths) {
+            ClassPool.getDefault().removeClassPath(interceptorClassPath);
+        }
+    }
+
     @Override
     public void onStop(AddonInfo addonInfo) {
+
+        /**
+         * 删除ClassPool中的classpath
+         */
+        removeClassPath();
 
         /**
          *  删除添加的菜单

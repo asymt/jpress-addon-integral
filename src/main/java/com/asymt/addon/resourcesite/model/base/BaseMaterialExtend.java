@@ -14,15 +14,15 @@ public abstract class BaseMaterialExtend<M extends BaseMaterialExtend<M>> extend
     /**
      * 文章ID
      */
-	public void setArticleId(Integer articleId) {
+	public void setArticleId(Long articleId) {
 		set("article_id", articleId);
 	}
 
     /**
      * 文章ID
      */
-	public Integer getArticleId() {
-		return getInt("article_id");
+	public Long getArticleId() {
+		return getLong("article_id");
 	}
 
     /**

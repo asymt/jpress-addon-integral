@@ -14,15 +14,15 @@ public abstract class BaseSlide<M extends BaseSlide<M>> extends JbootModel<M> im
     /**
      * 主键ID
      */
-	public void setId(Integer id) {
+	public void setId(Long id) {
 		set("id", id);
 	}
 
     /**
      * 主键ID
      */
-	public Integer getId() {
-		return getInt("id");
+	public Long getId() {
+		return getLong("id");
 	}
 
     /**
